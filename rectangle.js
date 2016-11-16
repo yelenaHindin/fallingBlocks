@@ -26,6 +26,33 @@
                 
     }
     
+    
+    
+    Object.defineProperties(Rectangle.prototype, {
+        x: {
+                set: function(value) {
+                    this.setx(value);
+                },
+
+                get: function () {
+
+                    return this.getx();
+                }
+            },
+        
+        y: {
+                set: function(value) {
+                    this.sety(value);
+                },
+
+                get: function() {
+                    return this.gety();
+                }
+
+            }
+    })
+    
+    
     Rectangle.init = function(containername, color, height, width){
         
         var self = this;

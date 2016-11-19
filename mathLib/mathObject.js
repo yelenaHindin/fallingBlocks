@@ -1,6 +1,6 @@
-var mathObject = mathObject || {};
+Linear = function() {};
 
-mathObject.prototype.scalarMult = function (v1, v2) {
+Linear.prototype.scalarMult = function (v1, v2) {
     if (!Array.isArray(v1) || !Array.isArray(v2))
         throw new Error("Not arrays")
 
@@ -15,7 +15,7 @@ mathObject.prototype.scalarMult = function (v1, v2) {
     return res;
 }
   
-mathObject.prototype.vectorMult = function (u, v) {
+Linear.prototype.vectorMult = function (u, v) {
     if (!Array.isArray(u) || !Array.isArray(v))
         throw new Error("Not arrays")
 
@@ -36,3 +36,12 @@ mathObject.prototype.vectorMult = function (u, v) {
 }
 
 
+Linear.prototype.vectorMatrixMult = function(v, m) {
+    var x = v[0], y = v[1], z = v[2];
+    var out = [];
+    out[0] = x * m[0][0] + y * m[1][0] + z * m[2][0];
+    out[1] = x * m[0][1] + y * m[1][1] + z * m[2][1];
+    out[2] = x * m[0][2] + y * m[1][2] + z * m[2][2];
+
+    return out;
+};

@@ -4,63 +4,73 @@
         return new Block.init(containername, color, height, width);
     }
     
-    Block.prototype = {
-        setx : function(x) {
-            this.posx = x;
-            this.elem.style.left = this.posx + 'px';
-            
-         },
         
-        sety : function (y) {
-            this.posy = y;
-            this.elem.style.top = this.posy + 'px';
-        },
-        
-        getx : function () {
-            return this.posx;
-        },
-        
-        gety : function () {
-            return this.posy;
-        }
-                
-    }
-    
-    
-    
     Object.defineProperties(Block.prototype, {
         x: {
                 set: function(value) {
-                    this.setx(value);
+		    this.posx = value;
+		    this.elem.style.left = this.posx + 'px';
                 },
 
                 get: function () {
-
-                    return this.getx();
+		    return this.posx;
                 }
             },
         
         y: {
                 set: function(value) {
-                    this.sety(value);
+		    this.posy = value;
+		    this.elem.style.top = this.posy + 'px';
                 },
 
                 get: function() {
-                    return this.gety();
+		    return this.posy;
                 }
 
-            }
+            },
+
+	height: {
+	    set: function (value){
+		this.elem.style.height = value;
+	    },
+
+	    get: function(){
+		return this.elem.style.height;
+	    }
+	},
+	
+	width: {
+	    set: function (value){
+		this.elem.style.width = value;
+	    },
+	    
+	    get: function() {
+		return this.elem.style.width;
+	    }
+	},
+
+	clientHeight: {
+	    get : function() {
+		return this.elem.clientHeight;
+	    }
+	},
+
+	clientWidth: {
+	    get : function () {
+		return this.elem.clientWidth;
+	    }
+	}
     })
     
     
     Block.init = function(containername, color, height, width){
         
         var self = this;
-        
         self.elem = document.createElement("div");
         self.elem.style.background = color || "black";
-        self.elem.style.height = height || "10px";
-        self.elem.style.width = width || "10px";
+        self.height =  height || "10px";
+	self.width =  width || "10px";
+        
         self.elem.style.position = "absolute";
         document.getElementById(containername).appendChild(self.elem); 
         

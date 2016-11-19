@@ -1,10 +1,10 @@
 (function (global){
     
-    var Rectangle = function (containername, color, height, width){
-        return new Rectangle.init(containername, color, height, width);
+    var Block = function (containername, color, height, width){
+        return new Block.init(containername, color, height, width);
     }
     
-    Rectangle.prototype = {
+    Block.prototype = {
         setx : function(x) {
             this.posx = x;
             this.elem.style.left = this.posx + 'px';
@@ -28,7 +28,7 @@
     
     
     
-    Object.defineProperties(Rectangle.prototype, {
+    Object.defineProperties(Block.prototype, {
         x: {
                 set: function(value) {
                     this.setx(value);
@@ -53,7 +53,7 @@
     })
     
     
-    Rectangle.init = function(containername, color, height, width){
+    Block.init = function(containername, color, height, width){
         
         var self = this;
         
@@ -71,9 +71,9 @@
      }
     
     //use trick from jquery so we don't have to use new keyword
-    Rectangle.init.prototype = Rectangle.prototype;
+    Block.init.prototype = Block.prototype;
 
     //attaach my object to global
-    global.Rectangle = Rectangle;
+    global.Block = Block;
 
 }(window));

@@ -11,42 +11,75 @@ var mr45 = [[Math.cos(45), -Math.sin(45), 0] , [Math.sin(45), Math.cos(45), 0], 
 
 var b = Block("container", "red", "50px", "50px");
 var l = new Linear();
+var id;
+var interval = 5;
 
 console.log(b.x, b.y);
 
-
-function moveUp() {
+function stepUp(e) {
     b.y -= b.clientHeight;
 }
 
-function moveDown() {
+function moveUp(e) {
+    if(e.shiftKey)
+	stepUp(e);
+    else
+	animateUp(e);
+}
+
+function animateUp(e) {
+    id = setInterval(frame, interval);
+    function frame() {
+	b.y--;
+    }    
+}
+
+function stepDown(e) {
     b.y += b.clientHeight;  
 }
 
-function moveLeft() {
-    b.x -= b.clientWidth;  
+function moveDown(e) {
+    if(e.shiftKey)
+	stepDown(e);
+    else 
+	animateDown(e);
 }
 
-function moveRight() {
-    b.x += b.clientWidth;  
+function animateDown(e) {
+    id = setInterval(frame, interval);
+    function frame() {
+	b.y++;
+    }
+}
+
+function moveLeft(e) {
+    if(e.shiftKey)
+	b.x -= b.clientWidth;  
+}
+
+function moveRight(e) {
+    if(e.shiftKey)
+	b.x += b.clientWidth;  
 }
 
 function checkKey(e) {
-    e = e || window.event;
-
-    if (e.keyCode == '38') {
-        moveUp();
+    var key = e.which || e.keyCode;
+    if (key == '38') {
+	moveUp();
     }
-    else if (e.keyCode == '40') {
-        moveDown();
+    else if (key == '40') {
+	moveDown();
     }
-    else if (e.keyCode == '37') {
-       moveLeft();
+    else if (key == '37') {
+	moveLeft();
     }
-    else if (e.keyCode == '39') {
-      moveRight();
+    else if (key == '39') {
+	moveRight();
     }
-}
+    else if (key == '187') {
+	clearInterval(id);	
+    }
+ }
 
 function checkMovementSide(e){
     var mx = e.clientX - container.offsetLeft;

@@ -13,6 +13,11 @@ var b = Block("container", "red", "50px", "50px");
 var l = new Linear();
 var id;
 var interval = 5;
+var looper;
+var degrees = 0;
+var speed = 30;
+
+document.getElementById("rotate").onclick = rotateAnimationViaCSS;
 
 console.log(b.x, b.y);
 
@@ -52,14 +57,40 @@ function animateDown(e) {
     }
 }
 
+function stepLeft(e) {
+    b.x -= b.clientWidth;  
+}
+
 function moveLeft(e) {
     if(e.shiftKey)
-	b.x -= b.clientWidth;  
+	stepLeft(e);
+    else
+	animateLeft(e);
+}
+
+function animateLeft(e){
+    id = setInterval(frame, interval);
+    function frame() {
+	b.x--;
+    }
+}
+
+function stepRight(e) {
+    b.x += b.clientWidth;  
 }
 
 function moveRight(e) {
     if(e.shiftKey)
-	b.x += b.clientWidth;  
+	stepRight(e);
+    else
+	animateRight(e);
+}
+
+function animateRight(e){
+    id = setInterval(frame, interval);
+    function frame() {
+	b.x++;
+    }
 }
 
 function checkKey(e) {
@@ -78,6 +109,9 @@ function checkKey(e) {
     }
     else if (key == '187') {
 	clearInterval(id);	
+    }
+    else if (key == '48') {
+	clearTimeout(looper);
     }
  }
 
@@ -99,3 +133,12 @@ function checkMovementSide(e){
 	moveLeft();
 }
 
+//rotation using css transform
+function rotateAnimationViaCSS(){
+    b.elem.style.transform = "rotate("+ degrees + "deg)";
+    looper = setTimeout('rotateAnimationViaCSS()',speed);
+    degrees++;
+    if(degrees > 359){
+	degrees = 1;
+    }
+}

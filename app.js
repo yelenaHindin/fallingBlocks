@@ -16,6 +16,10 @@ window.onload = function() {
     window.degrees = 0;
 
     document.getElementById("rotate").onclick = function() { stopCurrentAnimation(), rotateAnimationViaCSS()};
+    
+    window.ele = b.elem;
+    ele.onmousedown = elemMouseDown;
+    //ele.ondragstart = function(){return false};
 
     document.onkeydown = function(evt) {
 	console.log(evt);
@@ -46,6 +50,23 @@ window.onload = function() {
 }
 
 
+function elemMouseDown () {
+    document.onmousemove = elemMouseMove;
+}
+
+function elemMouseMove (ev) {
+    var pX = ev.pageX;
+    var pY = ev.pageY;
+    ele.style.left = pX + "px";
+    ele.style.top = pY + "px";
+    document.onmouseup = elemMouseUp;
+}
+
+function elemMouseUp () {
+    document.onmousemove = null;
+    document.onmouseup = null;
+}
+
 function flightFrame(block) 
 {
     var currTime = new Date().getTime();
@@ -56,15 +77,12 @@ function flightFrame(block)
     
 
     if ((x + block.clientWidth/2) > container.clientWidth) {
-	x = container.clientWidth - ( x - container.clientWidth + block.clientWidth/2) - block.clientWidth/2;
+	x = x - 2 * (x + block.clientWidth/2 - container.clientWidth);
 	block.velocity.x = -block.velocity.x;
 	block.flightStartPos.x = x;
 	block.flightStartTime = currTime;
     } else if ((x - block.clientWidth/2) < 0) {
-	console.log("Crossing left border");
-	console.log("old x = ", x);
 	x = x + 2 * (block.clientWidth/2 - x);
-	console.log("new x = ", x);
 	block.velocity.x = -block.velocity.x;
 	block.flightStartPos.x = x;
 	block.flightStartTime = currTime;
@@ -187,13 +205,13 @@ function checkMovementSide(e){
 
     var resv = l.vectorMatrixMult([vx,vy,0],mr45);
     if(resv[0] > 0 && resv[1] > 0)
-	moveDown();
+	moveDown(e);
     else if(resv[0] > 0 && resv[1] < 0)
-	moveRight();
+	moveRight(e);
     else if(resv[0] < 0 && resv[1] < 0)
-	moveUp();
+	moveUp(e);
     else if(resv[0] < 0 && resv[1] > 0)
-	moveLeft();
+	moveLeft(e);
 }
 
 //rotation using css transform

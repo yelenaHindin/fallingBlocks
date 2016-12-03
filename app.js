@@ -19,6 +19,11 @@ window.onload = function() {
     
     window.ele = b.elem;
     ele.onmousedown = elemMouseDown;
+    window.dragStart = {x:0, y:0};
+    window.initBlockPosition = {x:0, y:0};
+    initBlockPosition.x = b.x;
+    initBlockPosition.y = b.y;
+
 
     document.onkeydown = function(evt) {
 	console.log(evt);
@@ -49,14 +54,20 @@ window.onload = function() {
 }
 
 function elemMouseDown (ev) {
-   document.onmousemove = elemMouseMove;
+    dragStart.x = ev.pageX;
+    dragStart.y = ev.pageY;
+    
+    document.onmousemove = elemMouseMove;
 }
 
 function elemMouseMove (ev) {
-    var pX = ev.clientX - container.offsetLeft;
-    var pY = ev.clientY - container.offsetTop;
-    ele.style.left = pX + "px";
-    ele.style.top = pY + "px";
+    var moveVectorX = ev.pageX - dragStart.x;
+    var moveVectorY = ev.pageY - dragStart.y;
+ 
+    //dragStart.x = ev.pageX; //- container.offsetLeft;
+    //dragStart.y = ev.pageY;// - container.offsetTop;
+    b.x = initBlockPosition.x + moveVectorX;
+    b.y = initBlockPosition.y + moveVectorY;
 
     document.onmouseup = elemMouseUp;
 }

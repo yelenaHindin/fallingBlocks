@@ -3,30 +3,31 @@
   <head>
     <script src="app.js"></script>
     <style>
-        #target {
+        #t {
             background-color: yellow; 
             height: 400px; 
             width: 400px;
 	    display: inline-block;
         }
-        #notarget {
+        #not {
             background-color: blue; 
             height: 400px; 
             width: 400px;
 	    display: inline-block;
         }
 
-        #source {
+        #s {
             background-color: red; 
             height: 50px; 
             width: 50px;
+	    position:absolute;
         }
     </style>
   </head>
 <body>
-        <div id="target" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id="notarget"></div>
-        <div id="source" draggable="true" ondragstart="drag(event)"></div>
+        <div id="t" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="not"></div>
+        <div id="s" draggable="true" ondragstart="drag(this,event)"></div>
 
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="app.js"></script>
+    <style>
+        #target {
+            background-color: yellow; 
+            height: 400px; 
+            width: 400px;
+	    display: inline-block;
+        }
+        #notarget {
+            background-color: blue; 
+            height: 400px; 
+            width: 400px;
+	    display: inline-block;
+        }
+
+        #source {
+            background-color: red; 
+            height: 50px; 
+            width: 50px;
+        }
+    </style>
+  </head>
+<body>
+        <div id="target" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="notarget"></div>
+        <div id="source" draggable="true" ondragstart="drag(event)"></div>
+
+</body>
+</html>

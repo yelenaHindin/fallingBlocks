@@ -47,7 +47,7 @@ FigureO = function() {
 
 FigureO.prototype = Object.create(Figures.prototype);
 
-/*S - Z*/
+
 FigureS = function() {
     Figures.call(this);
 }

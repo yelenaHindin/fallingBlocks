@@ -1,12 +1,65 @@
 var posy = 0;
 var posx = 0;
 var rotdeg = 0;
-var px = 0;
-var py = 0;
+var pxFrom = 0;
+var pyFrom = 0;
+var pxTo = 0;
+var pyTo = 0;
+var animName = "gameAnim";
+var animCount = 0;
+
+var figureGameX = 0;
+var figureGameY = 0;
+
+var fieldGameWidth = 8;
+var fieldGameHeight = 8;
+
+var cellSize = 50;
+
+var rotation;
+
+
+function moveOneDown()
+{
+    pxFrom = figureGameX * cellSize;
+    pyFrom = figureGameY * cellSize;
+
+    figureGameY += 1;
+
+    pxTo = figureGameX * cellSize;
+    pyTo = figureGameY * cellSize;
+}
+
+function moveOneLeft()
+{
+    pxFrom = figureGameX * cellSize;
+    pyFrom = figureGameY * cellSize;
+
+    figureGameX -= 1;
+
+    pxTo = figureGameX * cellSize;
+    pyTo = figureGameY * cellSize;
+}
+
+function moveOneRight()
+{
+    pxFrom = figureGameX * cellSize;
+    pyFrom = figureGameY * cellSize;
+
+    figureGameX += 1;
+
+    pxTo = figureGameX * cellSize;
+    pyTo = figureGameY * cellSize;
+}
+
+function rotate()
+{
+    console.log("rotate");
+}
 
 window.onload = function() {
-    var bcontainer = document.getElementById("bcontainer");
-    var container =  document.getElementById("container");
+    var figure = document.getElementById("figure");
+    var field =  document.getElementById("field");
     var r;
     var ns = document.createElement("style");
     ns.type = "text/css";
@@ -16,82 +69,36 @@ window.onload = function() {
 //	console.log(evt);
 	switch (evt.key) {
 	case "ArrowDown":
-	    posy += 10;
-	    r = bcontainer.getBoundingClientRect();
-	    px = r.left;
-	    py = r.top;
-	    bcontainer.style.animationDuration = "4s";
-	    bcontainer.style.animationName = "animDown";
-	    bcontainer.style.animationTimingFunction = "linear";
-	    bcontainer.style.animationFillMode =  "forwards";
-	  /*  document.styleSheets[1].insertRule("@keyframes animDown { 0% {left : " + px + "px; top : " + py + "px; } 100% {left : " + px + "px; top : 300px; }}", 
-					       document.styleSheets[1].cssRules.length);*/
-	    document.styleSheets[1].insertRule("@keyframes animDown { from { transform: translate(" + px + "px, " + py + "px); } to { transform: translate(" + px + "px, 300px); }}", 
-				       document.styleSheets[1].cssRules.length);
+	    moveOneDown();
 	    break;
 	case "ArrowUp":
-	    posy -= 10;
-	    r = bcontainer.getBoundingClientRect();
-	    px = r.left;
-	    py = r.top;
-	    bcontainer.style.animationDuration = "4s";
-	    bcontainer.style.animationName = "animUp";
-	    bcontainer.style.animationTimingFunction = "linear";
-	    bcontainer.style.animationFillMode =  "forwards";
-	   /* document.styleSheets[1].insertRule("@keyframes animUp { 0% {left : " + px + "px; top : " + py + "px; } 100% {left : " + px + "px; top : 0px; }}", 
-					       document.styleSheets[1].cssRules.length);*/
-	    document.styleSheets[1].insertRule("@keyframes animUp { from { transform: translate(" + px + "px, " + py + "px); } to { transform: translate(" + px + "px, 0px); }}", 
-					       document.styleSheets[1].cssRules.length);
+	    rotate();
 	    break;
 	case "ArrowLeft":
-	    posx -= 10;
-	    r = bcontainer.getBoundingClientRect();
-	    px = r.left;
-	    py = r.top;
-	    bcontainer.style.animationDuration = "4s";
-	    bcontainer.style.animationName = "animLeft";
-	    bcontainer.style.animationTimingFunction = "linear";
-	    bcontainer.style.animationFillMode =  "forwards";
-	   /* document.styleSheets[1].insertRule("@keyframes animLeft { 0% {left : " + px + "px; top : " + py + "px; } 100% {left : 0px; top : " + py + "px; }}", 
-					       document.styleSheets[1].cssRules.length);*/
-	    document.styleSheets[1].insertRule("@keyframes animLeft { from { transform: translate(" + px + "px, " + py + "px); } to { transform: translate(0px," + py +"px); }}", 
-					       document.styleSheets[1].cssRules.length);
+	    moveOneLeft();
 	    break;
 	case "ArrowRight":
-	    posx += 10;
-	    r = bcontainer.getBoundingClientRect();
-	    px = r.left;
-	    py = r.top;
-	    bcontainer.style.animationDuration = "4s";
-	    bcontainer.style.animationName = "animRight";
-	    bcontainer.style.animationTimingFunction = "linear";
-	    bcontainer.style.animationFillMode =  "forwards";
-	   /* document.styleSheets[1].insertRule("@keyframes animRight { 0% {left : " + px + "px; top : " + py + "px; } 100% {left : 300px; top : " + py + "px; }}", 
-					       document.styleSheets[1].cssRules.length);*/
-	    document.styleSheets[1].insertRule("@keyframes animRight { from { transform: translate(" + px + "px, " + py + "px); } to { transform: translate(300px," + py +"px); }}", 
-					       document.styleSheets[1].cssRules.length);
-	    break;
-	case "r":
-	    bcontainer.style.animationDuration = "4s";
-	    bcontainer.style.animationName = "animRotate";
-	    bcontainer.style.animationTimingFunction = "linear";
-	    bcontainer.style.animationFillMode =  "forwards";
-	    document.styleSheets[1].insertRule("@keyframes animRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); }}", document.styleSheets[1].cssRules.length);
-	    break;
-	case "l":
-	    rotdeg += 5;
-	    break;
-	case "=":
-	    rotdeg = 0;
-	    break;
-	case "!":
-	    rotdeg = 90;
+	    moveOneRight();
 	    break;
 	default:
 	    break;
 	}
-//	bcontainer.style.transform =  "translate(" + posx + "px, "  + (posy + 25)  + "px) " + "rotate(" + rotdeg + "deg) translate(0px, -25px)";
-	
+
+	var fullAnimName = animName + (animCount++);
+
+	var cssRule = "@keyframes " + fullAnimName + " { from { transform: translate(" + pxFrom + "px, " + pyFrom + 
+					   "px); } to { transform: translate(" + pxTo + "px, " + pyTo + "px); }}";
+
+
+	if (document.styleSheets[1].cssRules.length > 0)
+	    document.styleSheets[1].removeRule(0);
+
+	document.styleSheets[1].insertRule(cssRule, document.styleSheets[1].cssRules.length);
+
+	figure.style.animationDuration = "1s";
+	figure.style.animationName = fullAnimName;
+	figure.style.animationTimingFunction = "linear";
+	figure.style.animationFillMode =  "forwards";
     }
     
 }

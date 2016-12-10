@@ -19,9 +19,36 @@ Letters.Letter = function() {
     this.rotation = new Letters.Rotation();
 }
 
-Letters.Letter.prototype.gameFieldCoord = function() {
-    throw new Error("Not implemented in superclass Letter");
+
+Letters.Letter.prototype.gameFieldCoord = function(coord, rotation, rotationCenter) {
+    var res=[];
+
+    for (var i = 0; i < shape.length; i++) {
+	var fromRotationPoint = Linear.substractVects(shape[i], rotationCenter);
+	switch (rotation) {
+	case R0:
+	    break;
+	case R90:
+	    fromRotationPoint = [fromRotationPoint[1], -fromRotationPoint[0]];
+	    break;
+	case R180:
+	    fromRotationPoint = [-fromRotationPoint[0], -fromRotationPoint[1]];
+	    break;
+	case R270:
+	    fromRotationPoint = [-fromRotationPoint[1], fromRotationPoint[0]];
+	    break;
+	default:
+	    break;
+	}
+
+	var fieldVec = Linear.addVects(fromRotationPoint, [-rotationCenter[0], -rotationCenter[1]]);
+	fieldVec = Linear.addVects(fieldVec, coord);
+	res.push(fieldVec);
+    }
+
+    return res;
 }
+
 
 Letters.Letter.prototype.moveLeft = function(){
     this.coord[0]--;
@@ -67,6 +94,11 @@ Letters.LetterO = function() {
 }
 
 Letters.LetterO.prototype = Object.create(Letters.Letter.prototype);
+
+Letters.LetterO.prototype.gameFieldCoord = function(coord, rotation, rotationCenter)
+{
+    return shape.map((e) => Linear.addVects(coord, e));
+}
 
 // S Letter
 Letters.LetterS = function() {

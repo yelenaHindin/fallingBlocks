@@ -1,6 +1,6 @@
-Linear = function() {};
+var Linear = Linear || {}
 
-Linear.prototype.scalarMult = function (v1, v2) {
+Linear.scalarMult = function (v1, v2) {
     if (!Array.isArray(v1) || !Array.isArray(v2))
         throw new Error("Not arrays")
 
@@ -15,7 +15,7 @@ Linear.prototype.scalarMult = function (v1, v2) {
     return res;
 }
   
-Linear.prototype.vectorMult = function (u, v) {
+Linear.vectorMult = function (u, v) {
     if (!Array.isArray(u) || !Array.isArray(v))
         throw new Error("Not arrays")
 
@@ -36,7 +36,7 @@ Linear.prototype.vectorMult = function (u, v) {
 }
 
 
-Linear.prototype.vectorMatrixMult = function(v, m) {
+Linear.vectorMatrixMult = function(v, m) {
     var x = v[0], y = v[1], z = v[2];
     var out = [];
     out[0] = x * m[0][0] + y * m[1][0] + z * m[2][0];
@@ -44,4 +44,18 @@ Linear.prototype.vectorMatrixMult = function(v, m) {
     out[2] = x * m[0][2] + y * m[1][2] + z * m[2][2];
 
     return out;
+};
+
+Linear.substractVects = function(v0, v1) {
+    var res= [];
+    for (var i = 0; i < v0.length; i++)
+	res.push(v0[i] - v1[i]);
+    return res;
+};
+
+Linear.addVects = function(v0, v1) {
+    var res= [];
+    for (var i = 0; i < v0.length; i++)
+	res.push(v0[i] + v1[i]);
+    return res;
 };

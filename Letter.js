@@ -1,6 +1,5 @@
 var Letters = Letters || {}
 
-
 Letters.EnumRotation = { R0: 0, R90: 90, R180: 180, R270: 270 };
 
 Letters.Rotation = function() {
@@ -10,7 +9,6 @@ Letters.Rotation = function() {
 Letters.Rotation.prototype.next = function() {
     this.r = (this.r + 90) % 360;
 }
-
 
 Letters.Letter = function() { 
     this.shape=[]; // two-dimensional array 4x2
@@ -24,7 +22,6 @@ Letters.Letter = function() {
 Letters.Letter.prototype.gameFieldCoord = function() {
     throw new Error("Not implemented in superclass Letter");
 }
-
 
 Letters.Letter.prototype.moveLeft = function(){
     this.coord[0]--;
@@ -87,7 +84,6 @@ Letters.LetterT = function() {
 
 Letters.LetterT.prototype = Object.create(Letters.Letter.prototype);
 
-
 //Z Letter
 Letters.LetterZ = function() {
     Letters.Letter.call(this);
@@ -95,5 +91,4 @@ Letters.LetterZ = function() {
 }
 
 Letters.LetterZ.prototype = Object.create(Letters.Letter.prototype);
-
 

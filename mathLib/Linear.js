@@ -59,3 +59,5 @@ Linear.addVects = function(v0, v1) {
 	res.push(v0[i] + v1[i]);
     return res;
 };
+
+module.exports = Linear;

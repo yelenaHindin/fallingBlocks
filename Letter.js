@@ -1,3 +1,7 @@
+if (process) {
+    var Linear = require('./mathLib/Linear.js');
+}
+
 var Letters = Letters || {}
 
 Letters.EnumRotation = { R0: 0, R90: 90, R180: 180, R270: 270 };
@@ -21,20 +25,20 @@ Letters.Letter = function() {
 
 
 Letters.Letter.prototype.gameFieldCoord = function(coord, rotation, rotationCenter) {
-    var res=[];
+    var res = [];
 
-    for (var i = 0; i < shape.length; i++) {
-	var fromRotationPoint = Linear.substractVects(shape[i], rotationCenter);
+    for (var i = 0; i < this.shape.length; i++) {
+	var fromRotationPoint = Linear.substractVects(this.shape[i], rotationCenter);
 	switch (rotation) {
-	case R0:
+	case Letters.EnumRotation.R0:
 	    break;
-	case R90:
+	case Letters.EnumRotation.R90:
 	    fromRotationPoint = [fromRotationPoint[1], -fromRotationPoint[0]];
 	    break;
-	case R180:
+	case Letters.EnumRotation.R180:
 	    fromRotationPoint = [-fromRotationPoint[0], -fromRotationPoint[1]];
 	    break;
-	case R270:
+	case Letters.EnumRotation.R270:
 	    fromRotationPoint = [-fromRotationPoint[1], fromRotationPoint[0]];
 	    break;
 	default:
@@ -123,4 +127,6 @@ Letters.LetterZ = function() {
 }
 
 Letters.LetterZ.prototype = Object.create(Letters.Letter.prototype);
+
+module.exports = Letters;
 

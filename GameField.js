@@ -24,8 +24,7 @@ GameField.prototype.set = function(coord, value) {
 }
 
 GameField.prototype.clear = function(coord) {
-    
-
+    this.set(coord, null);
 }
 
 

@@ -14,4 +14,16 @@ describe('Tetris game field functions', function() {
 	field.isValid([0, 0]).should.be.true();
     });
 
+    it('busy cell invalid', function() {
+	field.isValid([2, 1]).should.be.false();
+    });
+
+    it('negative invalid', function() {
+	field.isValid([-22, 1]).should.be.false();
+    });
+
+    it('out invalid', function() {
+	field.isValid([22, 1]).should.be.false();
+    });
+
 });

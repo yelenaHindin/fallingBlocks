@@ -3,9 +3,15 @@ var should = require('should');
 
 
 describe('Tetris game field functions', function() {
-    it('set field value', function() {
-	var f = new GameField.GameField(8,8);
-	//f.set([0, 0], 0);
+    var field;
+
+    beforeEach('initialize field', function() {
+	field = new GameField.GameField(6,8);
+	field.set([2, 1], "aaa");
+    })
+
+    it('empty cell valid', function() {
+	field.isValid([0, 0]).should.be.true();
     });
 
 });

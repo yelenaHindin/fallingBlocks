@@ -3,15 +3,19 @@ var GameField = GameField || {}
 GameField.GameField = function(h, w){
     this.fieldHeight = h;
     this.fieldWidth = w;
+
     this.field = [];
+
+    for (var i = 0; i < w; i++)
+	this.field[i] = [];
 }
 
 
 GameField.GameField.prototype.isValid = function(coord) {
     if (GameField.isCoord(coord)){
 	return (coord[0] < this.fieldWidth) && (coord[1] < this.fieldHeight)  &&
-	    (coord[0] > 0) && (coord[1] > 0) &&
-	    (this.field[coord[0]][coord[1]]);
+	    (coord[0] >= 0) && (coord[1] >= 0) &&
+	    (!this.field[coord[0]][coord[1]]);
     } else if (Array.isArray(coord) && coord.every((e) => GameField.isCoord(e))) {
 	coord.forEach((e) => this.isValid(e));
     } else {

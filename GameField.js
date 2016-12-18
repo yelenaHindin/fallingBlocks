@@ -21,7 +21,6 @@ GameField.GameField.prototype.isValid = function(coord) {
     } else {
 	throw new Error("Unexpected argument type " + coord);
     }
-
 }
 
 GameField.isCoord = function(a) {

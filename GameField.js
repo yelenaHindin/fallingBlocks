@@ -9,7 +9,9 @@ GameField.GameField = function(h, w){
 
 GameField.GameField.prototype.isValid = function(coord) {
     if (GameField.isCoord(coord)){
-	return (((coord[0] < this.fieldWidth) && (coord[1] < this.fieldHeight) && this.field[coord[0][coord[1]] != null));
+	return (coord[0] < this.fieldWidth) && (coord[1] < this.fieldHeight)  &&
+	    (coord[0] > 0) && (coord[1] > 0) &&
+	    (this.field[coord[0]][coord[1]]);
     } else if (Array.isArray(coord) && coord.every((e) => GameField.isCoord(e))) {
 	coord.forEach((e) => this.isValid(e));
     } else {
@@ -19,7 +21,7 @@ GameField.GameField.prototype.isValid = function(coord) {
 }
 
 GameField.isCoord = function(a) {
-    return Array.isArray(a) && !isNaN(a[0]) && !isNaN(a[1]) && a.length = 2;
+    return Array.isArray(a) && !isNaN(a[0]) && !isNaN(a[1]) && a.length == 2;
 }
 
 GameField.GameField.prototype.set = function(coord, value) {

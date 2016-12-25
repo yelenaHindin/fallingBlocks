@@ -6,13 +6,7 @@ var Letters = Letters || {}
 
 Letters.EnumRotation = { R0: 0, R90: 90, R180: 180, R270: 270 };
 
-Letters.Rotation = function() {
-    this.r = Letters.EnumRotation.R0;
-}
 
-Letters.Rotation.prototype.next = function() {
-    this.r = (this.r + 90) % 360;
-}
 
 Letters.Letter = function() {
     this.shape=[]; // two-dimensional array 4x2
@@ -20,7 +14,11 @@ Letters.Letter = function() {
 	this.shape[i] = [0, 0];
 
     this.coord = [0, 0];
-    this.rotation = new Letters.Rotation();
+    this.rotation = Letters.EnumRotation.R0;
+}
+
+Letters.Letter.prototype.rotate = function() {
+    this.rotation = (this.rotation + 90) % 360;
 }
 
 
@@ -60,10 +58,6 @@ Letters.Letter.prototype.moveLeft = function(){
 
 Letters.Letter.prototype.moveRight = function(){
     this.coord[0]++;
-}
-
-Letters.Letter.prototype.rotate = function(){
-    this.rotation.next();
 }
 
 // I Letter

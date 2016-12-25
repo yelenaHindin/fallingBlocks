@@ -1,5 +1,5 @@
 var GameField = require('./GameField.js')
-var Letters = require('./Letters.js');
+var Letters = require('./Letter.js');
 
 var letterConstructors = {
     'L': Letters.LetterL,
@@ -13,10 +13,10 @@ var letterConstructors = {
 
 module.exports = {
     createField: function(w, h) {
-        module.exports.field = new GameField(w, h);
+        module.exports.field = new GameField.GameField(w, h);
     },
 
     addLetter: function(l) {
-        module.exports.letter = new letterConstructors[l];
+        module.exports.currentLetter = new letterConstructors[l];
     }
 }

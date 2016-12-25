@@ -60,7 +60,8 @@ var cliFunction = {
     "l": lFunc,
     "h": hFunc,
     "d": function() { if (Tetris.currentLetter) Tetris.currentLetter.coord = [ Tetris.currentLetter.coord[0], Tetris.currentLetter.coord[1] + 1] },
-    "r": function() { Tetris.currentLetter.rotate(); }
+    "r": function() { Tetris.currentLetter.rotate(); },
+    "D": function() { if (Tetris.currentLetter) Tetris.drop(); }
 };
 
 
@@ -90,6 +91,6 @@ if (process.argv.length == 2) {
     printField(Tetris);
     lFunc('I');
     printField(Tetris);
-    cliFunction.r();
+    cliFunction.D();
     printField(Tetris);
 }

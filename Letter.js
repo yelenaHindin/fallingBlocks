@@ -14,9 +14,9 @@ Letters.Rotation.prototype.next = function() {
     this.r = (this.r + 90) % 360;
 }
 
-Letters.Letter = function() { 
+Letters.Letter = function() {
     this.shape=[]; // two-dimensional array 4x2
-    for (var i = 0; i < 4; i++) 
+    for (var i = 0; i < 4; i++)
 	this.shape[i] = [0, 0];
 
     this.coord = [0, 0];
@@ -33,13 +33,13 @@ Letters.Letter.prototype.gameFieldCoord = function(coord, rotation, rotationCent
 	case Letters.EnumRotation.R0:
 	    break;
 	case Letters.EnumRotation.R90:
-	    fromRotationPoint = [fromRotationPoint[1], -fromRotationPoint[0]];
+	    fromRotationPoint = [-fromRotationPoint[1], fromRotationPoint[0]];
 	    break;
 	case Letters.EnumRotation.R180:
 	    fromRotationPoint = [-fromRotationPoint[0], -fromRotationPoint[1]];
 	    break;
 	case Letters.EnumRotation.R270:
-	    fromRotationPoint = [-fromRotationPoint[1], fromRotationPoint[0]];
+	    fromRotationPoint = [fromRotationPoint[1], -fromRotationPoint[0]];
 	    break;
 	default:
 	    break;
@@ -129,4 +129,3 @@ Letters.LetterZ = function() {
 Letters.LetterZ.prototype = Object.create(Letters.Letter.prototype);
 
 module.exports = Letters;
-

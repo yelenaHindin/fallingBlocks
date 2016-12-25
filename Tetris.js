@@ -11,12 +11,16 @@ var letterConstructors = {
 }
 
 
-module.exports = {
-    createField: function(w, h) {
-        module.exports.field = new GameField.GameField(w, h);
-    },
-
-    addLetter: function(l) {
-        module.exports.currentLetter = new letterConstructors[l];
-    }
+var Tetris = function() {
 }
+
+Tetris.prototype.createField = function(w, h) {
+    this.field = new GameField.GameField(w, h);
+}
+
+Tetris.prototype.addLetter = function(l) {
+    this.currentLetter =  new letterConstructors[l];
+}
+
+
+module.exports = Tetris;

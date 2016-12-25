@@ -1,14 +1,15 @@
 var readline = require('readline');
-var Tetris = require('../Tetris.js');
+var T = require('../Tetris.js');
 
 
+Tetris = new T();
 Tetris.createField(6, 8);
 
 
 function printField(gameState) {
     var size = gameState.field.size();
 
-    if (Tetris.currentLetter)
+    if (gameState.currentLetter)
         console.log("currentLetter.rotation = ", gameState.currentLetter.rotation);
 
     for (var y = 0; y < size.height; y++) {

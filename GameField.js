@@ -41,6 +41,10 @@ GameField.GameField.prototype.clear = function(coord) {
     this.set(coord, null);
 }
 
+GameField.GameField.prototype.size = function() {
+    return { width: this.fieldWidth, height: this.fieldHeight };
+}
+
 module.exports = GameField;
 
 

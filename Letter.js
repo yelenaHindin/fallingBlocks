@@ -65,6 +65,7 @@ Letters.Letter.prototype.moveRight = function(){
 Letters.LetterI = function() {
     Letters.Letter.call(this);
     this.shape = [[0, 0], [1, 0], [2, 0] , [3, 0]];
+    this.rotationCenter = [0, 2];
 }
 
 Letters.LetterI.prototype = Object.create(Letters.Letter.prototype);
@@ -73,6 +74,7 @@ Letters.LetterI.prototype = Object.create(Letters.Letter.prototype);
 Letters.LetterJ = function() {
     Letters.Letter.call(this);
     this.shape = [[1, 0], [1, 1], [1, 2], [0, 2]];
+    this.rotationCenter = [1, 1];
 }
 Letters.LetterJ.prototype = Object.create(Letters.Letter.prototype);
 
@@ -81,6 +83,7 @@ Letters.LetterJ.prototype = Object.create(Letters.Letter.prototype);
 Letters.LetterL = function() {
     Letters.Letter.call(this);
     this.shape = [[0, 0], [0, 1], [0, 2], [1, 2]];
+    this.rotationCenter = [0, 1];
 }
 
 Letters.LetterL.prototype = Object.create(Letters.Letter.prototype);
@@ -102,6 +105,7 @@ Letters.LetterO.prototype.gameFieldCoord = function(coord, rotation, rotationCen
 Letters.LetterS = function() {
     Letters.Letter.call(this);
     this.shape = [[0, 1], [1, 1], [1, 0], [2, 0]];
+    this.rotationCenter = [1, 1];
 }
 
 Letters.LetterS.prototype = Object.create(Letters.Letter.prototype);
@@ -110,6 +114,7 @@ Letters.LetterS.prototype = Object.create(Letters.Letter.prototype);
 Letters.LetterT = function() {
     Letters.Letter.call(this);
     this.shape = [[0, 0], [0, 1], [0, 2], [1, 1]];
+    this.rotationCenter = [1, 0];
 }
 
 Letters.LetterT.prototype = Object.create(Letters.Letter.prototype);
@@ -118,6 +123,7 @@ Letters.LetterT.prototype = Object.create(Letters.Letter.prototype);
 Letters.LetterZ = function() {
     Letters.Letter.call(this);
     this.shape = [[0, 0], [0, 1], [1, 1], [2, 1]];
+    this.rotationCenter = [1, 1];
 }
 
 Letters.LetterZ.prototype = Object.create(Letters.Letter.prototype);

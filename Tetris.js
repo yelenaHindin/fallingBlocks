@@ -22,5 +22,17 @@ Tetris.prototype.addLetter = function(l) {
     this.currentLetter =  new letterConstructors[l];
 }
 
+Tetris.prototype.drop = function() {
+    var dropHeight = 0;
+
+    do {
+        dropHeight++;
+        var nextCoord = this.currentLetter.coord;
+        nextCoord[1] += dropHeight;
+        var dropCoords = this.currentLetter.gameFieldCoord(nextCoord, this.currentLetter.rotation, this.currentLetter.rotationCenter);
+    } while (this.field.isValid(dropCoords));
+    this.currentLetter.coord[1] += dropHeight - 1;
+}
+
 
 module.exports = Tetris;
